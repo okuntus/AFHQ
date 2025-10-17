@@ -93,25 +93,25 @@ export default function Navbar() {
           <Grid container alignItems="center" justifyContent="center">
             <NavLink to="/" style={{ display: 'flex', justifyContent: "center", alignItems: 'left' }}>
               <Box component="img" src={AFLogo} alt="GHAF logo" sx={{ width: { xs: 36, sm: 48 }, height: { xs: 36, sm: 48 }, borderRadius: 1, mr: { xs: 1, sm: 2 } }} />
-            </NavLink>
-                <Grid item>
-                  <NavLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-                  <Typography
-                    variant="h4"
-                    component="span"
-                    sx={{
-                      color: 'text.primary',
-                      fontWeight: 'bolder',
-                      fontFamily: 'Playfair Display, serif',
-                      display: { xs: 'none', sm: 'inline' },
-                      fontSize: { sm: '1.5rem', md: '1.75rem' },
-                    }}
-                  >
-                    Ghana Air Force
-                  </Typography>
-                </NavLink>
+              </NavLink>
+                  <Grid item>
+                    <NavLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                    <Typography
+                      variant="h4"
+                      component="span"
+                      sx={{
+                        color: 'text.primary',
+                        fontWeight: 'bolder',
+                        fontFamily: 'Playfair Display, serif',
+                        display: { xs: 'none', sm: 'inline' },
+                        fontSize: { sm: '1.5rem', md: '1.75rem' },
+                      }}
+                    >
+                      Ghana Air Force
+                    </Typography>
+                  </NavLink>
+                </Grid>
               </Grid>
-            </Grid>
     
 
           {/* Contact info on the right (desktop only) - moved out of the logo link */}
@@ -157,20 +157,7 @@ export default function Navbar() {
                 <VolunteerActivismIcon />
               </IconButton>
             </Tooltip>
-          </Box>
-
-          {/* Tablet: collapse contact block into a compact chip (visible at md only) */}
-          <Box sx={{ display: { xs: 'none', md: 'flex', lg: 'none' }, position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)' }}>
-            <Chip
-              component={NavLink}
-              to="/contact"
-              label="Contact"
-              clickable
-              size="small"
-              sx={{ bgcolor: 'secondary.main', color: '#fff', '&:hover': { bgcolor: 'secondary.dark' } }}
-              aria-label="Contact us"
-            />
-          </Box>
+          </Box>          
         </Container>
       </Toolbar>
 
