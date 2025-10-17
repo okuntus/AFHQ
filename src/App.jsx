@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 
 // Import Components
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 import Footer from './components/Footer';
 
 // Import Pages
@@ -34,11 +34,16 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Roboto',
-      '"Helvetica Neue"',
+      'Inter',
+      'system-ui',
       'Arial',
       'sans-serif'
     ].join(','),
+    h1: { fontFamily: 'Playfair Display, serif', fontWeight: 700 },
+    h2: { fontFamily: 'Playfair Display, serif', fontWeight: 700 },
+    h3: { fontFamily: 'Playfair Display, serif', fontWeight: 600 },
+    h4: { fontFamily: 'Playfair Display, serif', fontWeight: 600 },
+    button: { textTransform: 'none' },
   },
 });
 

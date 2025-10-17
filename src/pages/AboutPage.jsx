@@ -13,8 +13,7 @@ function AboutPage() {
           <InfoIcon />
         </Avatar>
         <Typography variant="body1" color="text.primary" paragraph>
-          My News Site was founded with a mission to deliver timely, accurate, and engaging news to our readers.
-          We believe in the power of information to inspire, educate, and connect communities.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, non iure. Fugit dolores natus fuga placeat unde blanditiis perferendis autem earum, veritatis minus corporis facilis quo aliquid, iusto quod enim.
         </Typography>
       </Box>
 
@@ -23,7 +22,7 @@ function AboutPage() {
           Our Vision
         </Typography>
         <Typography variant="body1" color="text.secondary" paragraph>
-          To be the most trusted and comprehensive source of news and analysis, fostering a well-informed society.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, non iure. Fugit dolores natus fuga placeat unde blanditiis perferendis autem earum, veritatis minus corporis facilis quo aliquid, iusto quod enim.
         </Typography>
 
         <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, color: 'text.primary' }}>
@@ -32,19 +31,19 @@ function AboutPage() {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 2 }}>
-              <Typography variant="h6" sx={{ color: 'secondary.main' }}>Jane Doe</Typography>
+              <Typography variant="h6" sx={{ color: 'secondary.main' }}>Fella Okuntus</Typography>
               <Typography variant="body2" color="text.secondary">Editor-in-Chief</Typography>
               <Typography variant="body2" sx={{ mt: 1 }}>
-                With over 15 years in journalism, Jane leads our editorial team with a passion for truth.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam eveniet beatae dolorem velit alias facilis, at nihil iste itaque, omnis sunt maiores harum dolorum nobis. Officia dolorem provident molestiae temporibus?
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 2 }}>
-              <Typography variant="h6" sx={{ color: 'secondary.main' }}>John Smith</Typography>
-              <Typography variant="body2" color="text.secondary">Lead Developer</Typography>
+              <Typography variant="h6" sx={{ color: 'secondary.main' }}>Nii Fakye</Typography>
+              <Typography variant="body2" color="text.secondary">Team Leader</Typography>
               <Typography variant="body2" sx={{ mt: 1 }}>
-                John ensures our platform is robust, fast, and user-friendly, bringing the news to you seamlessly.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsa culpa ratione distinctio quis, velit provident placeat! Ea dolore consectetur expedita suscipit, eos a eius doloremque, earum est facilis aperiam.
               </Typography>
             </Box>
           </Grid>
