@@ -87,77 +87,87 @@ export default function Navbar() {
 
   return (
     <AppBar position="sticky" elevation={1} sx={{ bgcolor: '#94caf9ff', color: 'text.primary', borderColor: 'divider' }}>
-      {/* Top row: centered logo + title */}
-          <Toolbar sx={{ py: 2, position: 'relative' }}>
-        <Container maxWidth="lg">
-          <Grid container alignItems="center" justifyContent="center">
-            <NavLink to="/" style={{ display: 'flex', justifyContent: "center", alignItems: 'left' }}>
-              <Box component="img" src={AFLogo} alt="GHAF logo" sx={{ width: { xs: 36, sm: 48 }, height: { xs: 36, sm: 48 }, borderRadius: 1, mr: { xs: 1, sm: 2 } }} />
+      {/* Top row: left logo, centered title, right contact/CTA */}
+  <Toolbar sx={{ py: 2, position: 'relative' }}>
+  <Container maxWidth="lg" disableGutters sx={{ position: 'relative',  px: { xs: 1, sm: 2 } }}>
+          <Grid container alignItems="center" >
+            {/* Left: logo */}
+            <Grid item xs={2} sm={2} md={2} sx={{ display: 'flex', alignItems: 'center' }}>
+              <NavLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                <Box component="img" src={AFLogo} alt="GHAF logo" sx={{ width: { xs: 36, sm: 48 }, height: { xs: 36, sm: 48 }, borderRadius: 1, mr: { xs: 1, sm: 4, md: 6, lg: 8 } }} />
               </NavLink>
-                  <Grid item>
-                    <NavLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-                    <Typography
-                      variant="h4"
-                      component="span"
-                      sx={{
-                        color: 'text.primary',
-                        fontWeight: 'bolder',
-                        fontFamily: 'Playfair Display, serif',
-                        display: { xs: 'none', sm: 'inline' },
-                        fontSize: { sm: '1.5rem', md: '1.75rem' },
-                      }}
-                    >
-                      Ghana Air Force
-                    </Typography>
-                  </NavLink>
-                </Grid>
-              </Grid>
-    
+            </Grid>
 
-          {/* Contact info on the right (desktop only) - moved out of the logo link */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', alignItems: 'center', gap: 2 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LocationOnIcon fontSize="smaller" color="action" />
-              <Box>
-                <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>Burma Camp Accra, Ghana</Typography>
-                <IconButton aria-label="copy location" size="small" onClick={() => copyToClipboard('Burma Camp Accra, Ghana', 'Location')} sx={{ transform: copying === 'Location' ? 'scale(0.85)' : 'scale(1)', transition: 'transform 140ms', ml: 1 }}>
-                </IconButton>
+            {/* Center: title */}
+            <Grid item xs={8} sm={8} md={8} sx={{ textAlign: 'center' }}>
+              <Typography
+                variant="h4"
+                component="div"
+                sx={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  color: 'text.primary',
+                  fontWeight: 'bolder',
+                  fontFamily: 'Playfair Display, serif',
+                  display: { xs: 'none', sm: 'block' },
+                  fontSize: { sm: '1.2rem', md: '1.5rem', lg: '2rem' },
+                  zIndex: 10,
+                }}
+              >
+                Ghana Air Force
+              </Typography>
+            </Grid>
+
+            {/* Right: contact/CTA (mobile icons remain in-flow) */}
+            <Grid item xs={2} sm={2} md={2} sx={{ position: 'absolute', left: '80%', gap: 2 }}>
+              {/* Mobile compact icons + CTA icon remain here */}
+              <Box sx={{ display: { xs: 'flex', md: 'flex', sm: 'flex', lg: 'none' }, ml: {xs: -4, md: 4, sm: -1}, alignItems: 'center', gap: 1 }}>
+                <Tooltip title="Call us" placement="bottom">
+                  <IconButton aria-label="call" component="a" href="tel:+233000000000" size="small" sx={{ color: 'inherit' }}>
+                    <PhoneIcon fontSize="smaller" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Email us" placement="bottom">
+                  <IconButton aria-label="email" component="a" href="mailto:info@ghaf.example" size="small" sx={{ color: 'inherit' }}>
+                    <EmailIcon fontSize="smaller" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Get Involved" placement="bottom">
+                  <IconButton component={NavLink} to="/contact" aria-label="Get Involved" color="inherit" sx={{ ml: 1 }}>
+                    <VolunteerActivismIcon fontSize="smaller" />
+                  </IconButton>
+                </Tooltip>
               </Box>
-            </Box>
+            </Grid>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <EmailIcon fontSize="smaller" color="action" />
-              <Box>
-                <Typography variant="caption" component="a" href="mailto:info@ghaf.example" sx={{ fontWeight: 600, color:'text.secondary',}}>info@ghaf.example</Typography>
-                <IconButton aria-label="copy email" size="small" onClick={() => copyToClipboard('info@ghaf.example', 'Email')} sx={{ transform: copying === 'Email' ? 'scale(0.85)' : 'scale(1)', transition: 'transform 140ms', ml: 1 }}>
-                </IconButton>
+            {/* Desktop: absolutely positioned address + CTA anchored to container right */}
+              <Box sx={{ display: { xs: 'none', lg: 'flex' }, position: 'absolute', right: { lg: '-100px' }, top: '50%', transform: 'translateY(-50%)', alignItems: 'center', gap: 1, zIndex: 20 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <LocationOnIcon fontSize="smaller" color="action" />
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>Burma Camp Accra, Ghana</Typography>
+                  </Box>
+                </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <EmailIcon fontSize="smaller" color="action" />
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography variant="caption" component="a" href="mailto:info@ghaf.example" sx={{ fontWeight: 600, color: 'text.secondary' }}>info@ghaf.example</Typography>
+                </Box>
               </Box>
+
+              <Button
+                variant="contained"
+                component={NavLink}
+                to="/contact"
+                sx={{ ml: 1, textTransform: 'none', borderRadius: 5, bgcolor: '#c5e0f8ff', '&:hover': { bgcolor: '#9ccaff' } }}
+              >
+                Get Involved
+              </Button>
             </Box>
-          </Box>
-
-          {/* Compact contact icons for small screens (with tooltips) */}
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, position: 'absolute', right: { xs: 8, sm: 96 }, top: '50%', transform: 'translateY(-50%)', alignItems: 'center', gap: 1 }}>
-            <Tooltip title="Call us" placement="bottom">
-              <IconButton aria-label="call" component="a" href="tel:+233000000000" size="small" sx={{ color: 'inherit' }}>
-                <PhoneIcon fontSize="smaller" />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Email us" placement="bottom">
-              <IconButton aria-label="email" component="a" href="mailto:info@ghaf.example" size="small" sx={{ color: 'inherit' }}>
-                <EmailIcon fontSize="smaller" />
-              </IconButton>
-            </Tooltip>
-          </Box>
-
-
-          {/* Adaptive CTA for small screens: icon linking to contact */}
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, position: 'absolute', right: { xs: 48, sm: 56 }, top: '50%', transform: 'translateY(-50%)' }}>
-            <Tooltip title="Get Involved" placement="bottom">
-              <IconButton component={NavLink} to="/contact" aria-label="Get Involved" color="inherit">
-                <VolunteerActivismIcon />
-              </IconButton>
-            </Tooltip>
-          </Box>          
+          </Grid>
         </Container>
       </Toolbar>
 
@@ -179,21 +189,6 @@ export default function Navbar() {
                     {item.label}
                   </Button>
                 ))}
-
-                {/* Desktop CTA on the right of the nav row */}
-                <Button
-                  variant="contained"
-                  component={NavLink}
-                  to="/contact"
-                  sx={{ ml: 2,
-                    textTransform: 'none',
-                    borderRadius: 3,
-                    bgcolor: '#c5e0f8ff',
-                    '&:hover': { bgcolor: '#9ccaff' },
-                  }}
-                >
-                  Get Involved
-                </Button>
             </Box>
 
             {/* Mobile menu button on the right */}
@@ -209,6 +204,7 @@ export default function Navbar() {
             </Box>
           </Toolbar>
         </Container>
+
 
         {/* Mobile Drawer remains unchanged */}
         <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>

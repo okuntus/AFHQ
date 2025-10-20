@@ -15,12 +15,18 @@ const slides = [
 
 function HomePage() {
   const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef(null);
 
   useEffect(() => {
-    timerRef.current = setInterval(() => setIndex((i) => (i + 1) % slides.length), 5000);
+    // autoplay when not paused
+    if (!isPaused) {
+      timerRef.current = setInterval(() => setIndex((i) => (i + 1) % slides.length), 5000);
+      return () => clearInterval(timerRef.current);
+    }
+    // if paused, ensure any existing timer is cleared
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [isPaused]);
 
   const goPrev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
   const goNext = () => setIndex((i) => (i + 1) % slides.length);
@@ -28,7 +34,11 @@ function HomePage() {
   return (
     <Box>
       {/* Carousel hero */}
-      <Box sx={{ position: 'relative', width: '100%', height: { xs: 300, md: 420 }, overflow: 'hidden' }}>
+      <Box
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        sx={{ position: 'relative', width: '100%', height: { xs: 300, md: 420 }, overflow: 'hidden' }}
+      >
         {slides.map((s, i) => (
           <Box
             key={i}
@@ -45,19 +55,29 @@ function HomePage() {
           />
         ))}
 
-        {/* overlay */}
-        <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(6,10,14,0.45), rgba(6,10,14,0.45))' }} />
+        {/* stronger overlay */}
+        <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(6,10,14,0.6), rgba(6,10,14,0.45))' }} />
 
         {/* Controls and content */}
         <Container maxWidth="lg" sx={{ position: 'relative', height: '100%' }}>
           <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: '#fff', py: 6 }}>
             <Box>
-              <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
+              <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: '1.25rem', md: '2rem' } }}>
                 {slides[index].title}
               </Typography>
-              <Typography variant="body2" sx={{ maxWidth: 640, mx: 'auto' }}>
+              <Typography variant="body1" sx={{ maxWidth: 640, mx: 'auto' }}>
                 {slides[index].subtitle}
               </Typography>
+
+              {/* CTA */}
+              <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center', gap: 2 }}>
+                <Button component={Link} to="/contact" variant="contained" color="secondary" sx={{ px: 4 }}>
+                  Contact Us
+                </Button>
+                <Button component={Link} to="/events" variant="outlined" color="inherit" sx={{ px: 3, borderColor: 'rgba(255,255,255,0.6)' }}>
+                  Events
+                </Button>
+              </Box>
             </Box>
           </Box>
 
