@@ -13,6 +13,7 @@ import HomePage from './pages/HomePage';
 import EventsPage from './pages/EventsPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import JoinUsPage from './pages/JoinUsPage';
 
 // Define your custom theme
 const theme = createTheme({
@@ -21,7 +22,7 @@ const theme = createTheme({
       main: '#FFFFFF', // White for primary elements (e.g., AppBar background)
     },
     secondary: {
-      main: '#007bff', // Sea Blue for accents (buttons, links, text) - using a common blue shade
+      main: '#2E8BC0', // Sea Blue for accents (buttons, links, text) - using a common blue shade
     },
     background: {
       default: '#f0f8ff', // Very light blue/almost white background
@@ -60,6 +61,7 @@ function App() {
               <Route path="/events" element={<EventsPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/join" element={<JoinUsPage />} />
             </Routes>
           </Box>
           <Footer />
