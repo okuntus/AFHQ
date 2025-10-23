@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import hero from '../assets/hero.jpg';
 
 function AboutPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -21,26 +22,43 @@ function AboutPage() {
   };
 
   return (
-    <div style={{ position: 'relative', textAlign: 'center', padding: '40px' }}>
-      <h1 onClick={toggleDropdown} style={{ cursor: 'pointer', color: '#2E8BC0' }}>
-        About Us ▾
-      </h1>
+    <div
+      style={{
+        position: 'relative',
+        textAlign: 'center',
+        padding: 0,
+        minHeight: '60vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#fff',
+        backgroundImage: `linear-gradient(rgba(10,25,40,0.45), rgba(10,25,40,0.45)), url(${hero})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <div style={{ maxWidth: 980, padding: '60px 20px' }}>
+        <h1 onClick={toggleDropdown} style={{ cursor: 'pointer', color: '#fff', marginBottom: 8 }}>
+          About Us ▾
+        </h1>
 
-      {isDropdownOpen && (
-        <div style={dropdownStyle}>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            <li><Link to="/about/profile">Profile</Link></li>
-            <li><Link to="/about/management">Management</Link></li>
-            <li><Link to="/about/gallery">Gallery</Link></li>
-            <li><Link to="/about/news-events">News & Events</Link></li>
-          </ul>
-        </div>
-      )}
+        {isDropdownOpen && (
+          <div style={dropdownStyle}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li><Link to="/about/profile">Profile</Link></li>
+              <li><Link to="/about/management">Management</Link></li>
+              <li><Link to="/about/gallery">Gallery</Link></li>
+              <li><Link to="/about/news-events">News & Events</Link></li>
+            </ul>
+          </div>
+        )}
 
-      <p style={{ marginTop: '40px', fontSize: '1.1rem' }}>
-        Welcome to our organization. Click on any of the sections above to learn more
-        about the Ghana Air Force, its management, gallery, and upcoming events.
-      </p>
+        <p style={{ marginTop: '20px', fontSize: '1.15rem', color: 'rgba(255,255,255,0.95)' }}>
+          Welcome to our organization. Learn more about the Ghana Air Force, its mission, management,
+          gallery, and upcoming events.
+        </p>
+      </div>
     </div>
   );
 }

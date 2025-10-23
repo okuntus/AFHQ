@@ -18,7 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import AFLogo from '../assets/AFLogo.jpg';
 
 export default function Navbar() {
@@ -34,6 +34,7 @@ export default function Navbar() {
 
   const toggleDrawer = (next) => () => setOpen(next);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleAboutOpen = (e) => setAboutAnchor(e.currentTarget);
   const handleAboutClose = () => setAboutAnchor(null);
@@ -86,47 +87,44 @@ export default function Navbar() {
           <Toolbar disableGutters sx={{ position: 'relative', minHeight: 72 }}>
             <Box
               display="grid"
-              gridTemplateColumns={{ xs: '1fr 8fr 1fr', md: '2fr 8fr 2fr' }}
+              gridTemplateColumns={{ xs: 'auto 1fr auto', md: 'auto 1fr auto' }}
               alignItems="center"
               width="100%"
             >
-              {/* Left spacer */}
-              <Box />
+              {/* Left: Logo + Title (moved to far left) */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, pl: { xs: 1, sm: 0 } }}>
+                <NavLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                  <Box
+                    component="img"
+                    src={AFLogo}
+                    alt="Ghana Air Force"
+                    sx={{ width: { xs: 32, sm: 40, md: 48 }, height: 'auto', borderRadius: 1, mr: 1.5 }}
+                  />
+                </NavLink>
 
-              {/* Center: Logo + Title */}
-              <Box sx={{ textAlign: 'center', position: 'relative' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-                  <NavLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-                    <Box
-                      component="img"
-                      src={AFLogo}
-                      alt="Ghana Air Force"
-                      sx={{ width: { xs: 32, sm: 40, md: 48 }, height: 'auto', borderRadius: 1, mr: 1.5 }}
-                    />
-                  </NavLink>
-
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      position: 'relative',
-                      color: '#ffffff',
-                      fontWeight: 700,
-                      fontFamily:
-                        'Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial',
-                      letterSpacing: 0.2,
-                      fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem', lg: '1.8rem' },
-                    }}
-                  >
-                    Ghana Air Force
-                  </Typography>
-                </Box>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    color: '#ffffff',
+                    fontWeight: 700,
+                    fontFamily:
+                      'Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial',
+                    letterSpacing: 0.2,
+                    fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem', lg: '1.8rem' },
+                  }}
+                >
+                  Ghana Air Force
+                </Typography>
               </Box>
+
+              {/* Center spacer */}
+              <Box />
 
               {/* Right: Nav links + mobile menu */}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                {/* Desktop links (sm and up, hide on xs) */}
-                <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1.5, alignItems: 'center' }}>
+                {/* Desktop links (sm and up, hide on xs; hidden on lg because right-side nav shows at lg) */}
+                <Box sx={{ display: { xs: 'none', sm: 'flex', lg: 'none' }, gap: 1.5, alignItems: 'center' }}>
                   {navItems.map((item) => {
                     const isActive = location.pathname === item.to;
                     return (
@@ -135,8 +133,14 @@ export default function Navbar() {
                         component={NavLink}
                         to={item.to}
                         color="inherit"
+                        onClick={(e) => {
+                          // programmatic navigate fallback in case clicks are swallowed by overlays
+                          e.preventDefault();
+                          navigate(item.to);
+                        }}
                         sx={{
                           textTransform: 'none',
+                          whiteSpace: 'nowrap',
                           color: '#fff',
                           position: 'relative',
                           '&::after': {
@@ -203,7 +207,10 @@ export default function Navbar() {
                 transform: 'translateY(-50%)',
                 display: { xs: 'none', lg: 'flex' },
                 alignItems: 'center',
-                gap: 2,
+                gap: 3,
+                '& .MuiButton-root': {
+                  fontSize: { lg: '0.95rem' },
+                },
               }}
             >
               {[{ label: 'Home', to: '/' }, { label: 'About', to: '/about' }, { label: 'Events', to: '/events' }, { label: 'Contact', to: '/contact' }].map((item) => {
@@ -214,8 +221,13 @@ export default function Navbar() {
                     component={NavLink}
                     to={item.to}
                     color="inherit"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate(item.to);
+                    }}
                     sx={{
                       textTransform: 'none',
+                      whiteSpace: 'nowrap',
                       color: '#fff',
                       position: 'relative',
                       '&::after': {
@@ -240,9 +252,14 @@ export default function Navbar() {
                 component={NavLink}
                 to="/contact"
                 variant="contained"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/contact');
+                }}
                 sx={{
                   bgcolor: '#fff',
                   color: '#2E8BC0',
+                  whiteSpace: 'nowrap',
                   textTransform: 'none',
                   borderRadius: 3,
                   px: 3,
@@ -260,26 +277,82 @@ export default function Navbar() {
           <Box sx={{ width: 260 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
               {/* include About sub-links inside the drawer as nested items */}
-              <ListItemButton component={NavLink} to="/">
-                <ListItemText primary="Home" />
+              <ListItemButton
+                component={NavLink}
+                to="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/');
+                  setOpen(false);
+                }}
+              >
+                <ListItemText primary="Home" primaryTypographyProps={{ noWrap: true }} />
               </ListItemButton>
-              <ListItemButton component={NavLink} to="/about/profile">
-                <ListItemText primary="Profile" />
+              <ListItemButton
+                component={NavLink}
+                to="/about/profile"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/about/profile');
+                  setOpen(false);
+                }}
+              >
+                <ListItemText primary="Profile" primaryTypographyProps={{ noWrap: true }} />
               </ListItemButton>
-              <ListItemButton component={NavLink} to="/about/management">
-                <ListItemText primary="Management" />
+              <ListItemButton
+                component={NavLink}
+                to="/about/management"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/about/management');
+                  setOpen(false);
+                }}
+              >
+                <ListItemText primary="Management" primaryTypographyProps={{ noWrap: true }} />
               </ListItemButton>
-              <ListItemButton component={NavLink} to="/about/gallery">
-                <ListItemText primary="Gallery" />
+              <ListItemButton
+                component={NavLink}
+                to="/about/gallery"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/about/gallery');
+                  setOpen(false);
+                }}
+              >
+                <ListItemText primary="Gallery" primaryTypographyProps={{ noWrap: true }} />
               </ListItemButton>
-              <ListItemButton component={NavLink} to="/about/news-events">
-                <ListItemText primary="News & Events" />
+              <ListItemButton
+                component={NavLink}
+                to="/about/news-events"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/about/news-events');
+                  setOpen(false);
+                }}
+              >
+                <ListItemText primary="News & Events" primaryTypographyProps={{ noWrap: true }} />
               </ListItemButton>
-              <ListItemButton component={NavLink} to="/events">
-                <ListItemText primary="Events" />
+              <ListItemButton
+                component={NavLink}
+                to="/events"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/events');
+                  setOpen(false);
+                }}
+              >
+                <ListItemText primary="Events" primaryTypographyProps={{ noWrap: true }} />
               </ListItemButton>
-              <ListItemButton component={NavLink} to="/contact">
-                <ListItemText primary="Contact" />
+              <ListItemButton
+                component={NavLink}
+                to="/contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/contact');
+                  setOpen(false);
+                }}
+              >
+                <ListItemText primary="Contact" primaryTypographyProps={{ noWrap: true }} />
               </ListItemButton>
             </List>
           </Box>
