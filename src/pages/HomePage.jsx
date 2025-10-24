@@ -1,7 +1,4 @@
 
-
-
-import React from 'react';
 import { Container, Box, Typography, Button } from '@mui/material';
 
 function HomePage() {

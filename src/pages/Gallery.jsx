@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 
-
-export default function Gallery() {
-
-    
-}
-=======
 import React from "react";
 
 export function Gallery() {
@@ -14,4 +7,3 @@ export function Gallery() {
 
 
 export default Gallery;
->>>>>>> e1567fe9a4da494086793042594a2a407989bd68

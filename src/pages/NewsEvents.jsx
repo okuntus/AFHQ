@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 
-
-
-export default function NewsEvents() {
-
-    
-}
-=======
 import React from "react";
 
  function NewsEvents() {
@@ -21,4 +13,3 @@ import React from "react";
 }
 
 export default NewsEvents;
->>>>>>> e1567fe9a4da494086793042594a2a407989bd68
