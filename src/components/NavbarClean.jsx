@@ -49,7 +49,7 @@ const handleAboutClose = () => setAboutAnchor(null);
         <Container maxWidth="lg">
           <Toolbar disableGutters sx={{ minHeight: 34, px: { xs: 1, sm: 2 } }}>
             <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Box sx={{ display: {xs: 'none', sm: 'none', lg: 'flex'}, gap: 3, alignItems: 'center' }}>
+              <Box sx={{ display: {xs: 'none', sm: 'flex', md: 'flex', lg: 'flex'}, gap: 3, alignItems: 'center' }}>
                 <Box  component="a"
                       href="mailto:info@ghaf.example"
                       sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
