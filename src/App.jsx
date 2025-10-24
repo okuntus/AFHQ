@@ -33,8 +33,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Resets CSS and applies basic Material UI styles */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', borderRadius: 5, overflow: 'hidden' }}>
           <Navbar />
           <Box component="main" sx={{ flexGrow: 1, py: 4 }}> {/* Main content area */}
             <Routes>
