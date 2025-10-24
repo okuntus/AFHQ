@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -29,11 +29,13 @@ import AFLogo from '../assets/logo-long.png';
 export default function NavbarClean() {
   const [open, setOpen] = useState(false);
   const [aboutAnchor, setAboutAnchor] = useState(null);
+
   const navItems = [
     { label: 'Home', to: '/' },
     { label: 'Events', to: '/events' },
     { label: 'Contact', to: '/contact' },
   ];
+  
   const toggleDrawer = (next) => () => setOpen(next);
   const location = useLocation();
   const navigate = useNavigate();
@@ -85,7 +87,6 @@ export default function NavbarClean() {
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                 <Box sx={{ display: { xs: 'none', sm: 'flex', lg: 'none' }, gap: 1.5, alignItems: 'center' }}>
                   {navItems.map((item) => {
-                    const isActive = location.pathname === item.to;
                     return (
                       <Button key={item.to} component={NavLink} to={item.to} color="inherit" onClick={(e) => { e.preventDefault(); navigate(item.to); }} sx={{ textTransform: 'none', color: '#fff' }}>{item.label}</Button>
                     );
@@ -108,12 +109,42 @@ export default function NavbarClean() {
               </Box>
             </Box>
 
+
+                  {/* navigation for lg screens */}
             <Box sx={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: 3 }}>
-              {[{ label: 'Home', to: '/' }, { label: 'About', to: '/about' }, { label: 'Events', to: '/events' }, { label: 'Contact', to: '/contact' }].map((item) => (
-                <Button key={item.to} component={NavLink} to={item.to} color="inherit" onClick={(e) => { e.preventDefault(); navigate(item.to); }} sx={{ textTransform: 'none', color: '#fff' }}>{item.label}</Button>
+              {[{ label: 'Home', to: '/' },
+              { label: 'About', to: '/about' },
+              { label: 'Events', to: '/events' },
+              { label: 'Contact', to: '/contact' }].map((item) => (
+                <Button
+                  key={item.to}
+                  component={NavLink}
+                  to={item.to}
+                  color="inherit"
+                  onClick={(e) => { e.preventDefault(); navigate(item.to); }}
+                  sx={{ textTransform: 'none',
+                        color: '#fff',
+                        borderBottom: location.pathname === item.to ? '2px solid #fff' : 'none',
+                        borderRadius: 2,
+                        px: 2
+                      }}>
+
+                  {item.label}
+                </Button>
               ))}
 
-              <Button component={NavLink} to="/contact" variant="contained" onClick={(e) => { e.preventDefault(); navigate('/contact'); }} sx={{ bgcolor: '#fff', color: '#2E8BC0', textTransform: 'none', borderRadius: 3, px: 3 }}>Get Involved</Button>
+                <Button
+                  component={NavLink} to="/join"
+                  variant="contained"
+                  onClick={(e) => { e.preventDefault(); navigate('/join'); }}
+                    sx={{ bgcolor: '#fff',
+                          color: '#2E8BC0',
+                          textTransform: 'none',
+                          borderRadius: 3,
+                          px: 3 }}>
+                            
+                          Get Involved
+                </Button>
             </Box>
           </Toolbar>
         </Container>
