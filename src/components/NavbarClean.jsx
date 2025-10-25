@@ -14,6 +14,7 @@ ListItemText,
 Menu,
 MenuItem,
 Tooltip,
+Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
@@ -50,21 +51,25 @@ const handleAboutClose = () => setAboutAnchor(null);
           <Toolbar disableGutters sx={{ minHeight: 34, px: { xs: 1, sm: 2 } }}>
             <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <Box sx={{ display: {xs: 'none', sm: 'flex', md: 'flex', lg: 'flex'}, gap: 3, alignItems: 'center' }}>
-                <Box  component="a"
-                      href="mailto:info@ghaf.example"
-                      sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
-                    <EmailIcon fontSize="small" />
+                <Tooltip title="Email">
+                  <Box  component="a"
+                        href="mailto:info@ghaf.example"
+                        sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
+                      <EmailIcon fontSize="small" />
+                      <Typography variant="caption" sx={{ fontWeight: 600 }}>
+                        info@ghaf.example
+                      </Typography>
+                  </Box>
+                </Tooltip>
+                <Tooltip title="Phone Number">
+                  <Box component="a" href="tel:+2332404809600"
+                        sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
+                    <PhoneIcon fontSize="small" />
                     <Typography variant="caption" sx={{ fontWeight: 600 }}>
-                      info@ghaf.example
+                      +233 240-480-9600
                     </Typography>
-                </Box>
-                <Box component="a" href="tel:+2332404809600"
-                      sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
-                  <PhoneIcon fontSize="small" />
-                  <Typography variant="caption" sx={{ fontWeight: 600 }}>
-                    +233 240-480-9600
-                  </Typography>
-                </Box>
+                  </Box>
+                </Tooltip>
               </Box>
 
               <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
@@ -88,12 +93,14 @@ const handleAboutClose = () => setAboutAnchor(null);
                       <YoutubeIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, pl: 1 }}>
-                    <LocationOnIcon fontSize="small" />
-                      <Typography variant="caption" sx={{ fontWeight: 600 }}>
-                        Burma Camp, Accra
-                      </Typography>
-                  </Box>
+                  <Tooltip title="Location">
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, pl: 1 }}>
+                      <LocationOnIcon fontSize="small" />
+                        <Typography variant="caption" sx={{ fontWeight: 600 }}>
+                          Burma Camp, Accra
+                        </Typography>
+                    </Box>
+                  </Tooltip>
               </Box>
           </Box>
         </Toolbar>
@@ -110,7 +117,7 @@ const handleAboutClose = () => setAboutAnchor(null);
                 <NavLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                   <Box component="img" src={AFLogo} alt="Ghana Air Force" sx={{ width: { xs: 32, sm: 40, md: 48 }, height: 'auto', borderRadius: 1, mr: 1.5 }} />
                 </NavLink>
-                <Typography variant="h6" component="div" sx={{ color: '#ffffff', fontWeight: 700 }}>
+                <Typography variant="h6" component="div" sx={{ color: '#fff', fontWeight: 700, fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem', lg: '2rem' } }}>
                   Ghana Air Force
                 </Typography>
               </Box>
@@ -200,7 +207,6 @@ const handleAboutClose = () => setAboutAnchor(null);
             
 
             {/* Drawer for mobile navigation */}
-
             <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
               {/* logo and title in app drawer */}
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -211,6 +217,7 @@ const handleAboutClose = () => setAboutAnchor(null);
                   Ghana Air Force
                 </Typography>
               </Box>
+              <Divider sx={{py: 1}} />
 
               <Box sx={{ width: 'drawerWidth' }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
                 <List>
@@ -241,25 +248,28 @@ const handleAboutClose = () => setAboutAnchor(null);
                     <ListItemButton component={NavLink} to="/contact" onClick={(e) => { e.preventDefault(); navigate('/contact'); setOpen(false); }}>
                       <ListItemText primary="Contact" primaryTypographyProps={{ noWrap: true }} />
                     </ListItemButton>
-                </List>
-                    {/* <Box sx={{ display: {xs: 'none', sm: 'none'}, gap: 3, alignItems: 'center' }}>
+                  </List>
+                </Box>
+
+                {/* contact info in app drawer */}
+                <Box sx={{ p: 2, borderTop: '1px solid #ccc' }}>
+                     <Box sx={{ display: {xs: 'block', sm: 'block'}, alignItems: 'center'}}>
                       <Box  component="a"
                           href="mailto:info@ghaf.example"
                           sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
-                        <EmailIcon fontSize="small" />
-                        <Typography variant="caption" sx={{ fontWeight: 600 }}>
+                        <EmailIcon fontSize="smaller" />
+                        <Typography variant="caption" sx={{ fontWeight: 300 }}>
                           info@ghaf.example
                         </Typography>
                       </Box>
-                    <Box component="a" href="tel:+2332404809600"
-                          sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
-                      <PhoneIcon fontSize="small" />
-                      <Typography variant="caption" sx={{ fontWeight: 600 }}>
-                        +233 240-480-9600
-                      </Typography>
-                    </Box>
-                  </Box> */}
-
+                      <Box component="a" href="tel:+2332404809600"
+                            sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'inherit', textDecoration: 'none' }}>
+                        <PhoneIcon fontSize="smaller" />
+                        <Typography variant="caption" sx={{ fontWeight: 300, py: 1}}>
+                          +233 240-480-9600
+                        </Typography>
+                      </Box>
+                  </Box>
                 </Box>
             </Drawer>
       </AppBar>
