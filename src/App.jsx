@@ -4,8 +4,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 
-
-
 // Import Components
 import Footer from './components/Footer';
 import Navbar from './components/NavbarClean';
@@ -33,8 +31,9 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', borderRadius: 5, overflow: 'hidden' }}>
-          <Navbar />
+          <Navbar/>
           <Box component="main" sx={{ flexGrow: 1, py: 4 }}> {/* Main content area */}
             <Routes>
               <Route path="/" element={<HomePage />} />
