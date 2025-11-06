@@ -40,9 +40,16 @@ export default function NavbarClean() {
       <AppBar
         position="fixed"
         sx={{
-          bgcolor: '#e8f6fb',
+          bgcolor: '#e8f6fbe6',
           color: '#0f1720b1',
           zIndex: (theme) => theme.zIndex.drawer + 2,
+          width: {xs: '94%', sm: '90%', md: '85%'},
+          left: '50%',
+          transform: 'translateX(-50%)',
+          mt: 1,
+          borderRadius: 11,
+          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+          backdropFilter: 'blur(8px)',
         }}
       >
         <Container maxWidth="xl">
@@ -50,7 +57,7 @@ export default function NavbarClean() {
             disableGutters
             sx={{
               minHeight: { xs: 32, sm: 36 },
-              px: 1,
+              px: 2,
               justifyContent: 'space-between',
               flexWrap: 'wrap',
             }}
@@ -131,12 +138,18 @@ export default function NavbarClean() {
       <AppBar
         position="fixed"
         sx={{
-          top: { xs: 32, sm: 36 },
-          bgcolor: '#49ade6ff',
+          bgcolor: '#49ace6d7',
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          transition: 'top 0.2s ease',
+          width: { xs: '94%', sm: '90%', md: '85%' },
+          left: '50%',
+          transform: 'translateX(-50%)',
+          mt: { xs: 8, sm: 9, md: 10, lg: 6.5 },
+          borderRadius: 11,
+          boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+          backdropFilter: 'blur(10px)',
+          transition: 'all 0.3s ease',
         }}
-        elevation={2}
+        elevation={0}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: { xs: 56, md: 72 } }}>
