@@ -11,6 +11,9 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import AFLogo from '../assets/logo-long.png';
 
+
+
+//beginning of main webpage
 export default function NavbarClean() {
   const [open, setOpen] = useState(false);
   const [aboutAnchor, setAboutAnchor] = useState(null);

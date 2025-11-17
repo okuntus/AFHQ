@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Typography, Button, Paper, Box, Divider } from '@mui/material';
+import Gallery from './Gallery';
 import Image from '@mui/icons-material/Image';
 import EventIcon from '@mui/icons-material/Event';
 import Hero from '../assets/LE-visit.jpg';
 import Hero1 from '../assets/breast.jpg';
-import Hero2 from '../assets/induction-cas.jpg';
+import Hero2 from '../assets/VBTeam.jpg';
 import Casa from '../assets/casa.jpg';
 import Mi from '../assets/MI.jpg';
 import Falcon from '../assets/falcon.jpg';
 import Z9 from '../assets/z9.jpg';
 import K8 from '../assets/k8.jpg';
+import AFLogo from '../assets/logo-long.png';
 
 
 
@@ -26,7 +28,7 @@ const SimpleCarousel = () => {
     },
     {
       image: Hero2,
-      caption: "Induction Church Parade held for Air Vice Marshall Agyen-Frempong",
+      caption: "GHAF male and female team VolleyBall teams emerged champions of the maiden 'De Tour Du Accra'",
     },
   ];
 
@@ -377,10 +379,10 @@ const AssetCarousel = () => {
 // --- News Headlines Component (No change) ---
 const NewsHeadlines = () => {
   const headlines = [
+    "Air Force male and female volley team wins another trophy",
     "Ghana Air Force holds annual Tech fair",
     "Govt and GHAF in talks to purchase new aircrafts",
     "End of Year celebration schedule for early 2026",
-    "Air Force volley team wins another trophy",
     "Air Force Handball qualify for the finals"
   ];
 
@@ -389,16 +391,16 @@ const NewsHeadlines = () => {
       <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: 'primary.dark' }}>
         📰 Latest Headlines
       </Typography>
-      <Divider sx={{ mb: 2 }} />
+      <Divider sx={{ mb: 1 }} />
         <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
           {headlines.map((headline, index) => (
             <Box 
               component="li" 
               key={index} 
               sx={{ 
-                mb: 1.5, 
-                pb: 1.5, 
-                borderBottom: '1px solid #eee', 
+                m: 1,
+                p: .5,
+                borderBottom: '.5px solid #eee', 
                 '&:last-child': { borderBottom: 'none', pb: 0 }
               }}
             >
@@ -409,13 +411,13 @@ const NewsHeadlines = () => {
                   '&:hover': { color: 'primary.main', textDecoration: 'underline' } 
                 }}
               >
-                **{headline}**
+                {headline}
               </Typography>
             </Box>
           ))}
         </Box>
       <Box textAlign="right" mt={2}>
-         <Button size="small" variant="contained">View All News</Button>
+         <Button size="small" variant="contained" href="#">View All News</Button>
       </Box>
     </Paper>
   );
@@ -423,28 +425,106 @@ const NewsHeadlines = () => {
 
 
 // featured article component
-const ContentCard = ({ title, description }) => (
+const ContentCard = ({ title, description, image }) => (
   <Paper
     elevation={3}
-    sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'center' }}
+    sx={{
+      p: 2,
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      textAlign: 'center',
+      borderRadius: 4,
+      overflow: 'hidden',
+      background: 'linear-gradient(135deg, #49ade640 0%, #ffffff99 100%)',
+      backdropFilter: 'blur(12px)',
+      boxShadow: '0 8px 24px #00000026',
+      border: '1px solid #ffffff4d',
+      transition: 'all 0.35s ease',
+      '&:hover': {
+        transform: 'translateY(-6px)',
+        boxShadow: '0 12px 30px #00000040',
+        // background: 'linear-gradient(135deg, #49ade659 0%, #ffffffb3 100%)',
+      },
+    }}
   >
-    <Typography variant="h6" gutterBottom sx={{ color: 'primary.main' }}>{title}</Typography>
-    <Typography variant="body2" color="text.secondary">{description}</Typography>
-    <Button variant="text" size="small" sx={{ mt: 2 }}>Read More</Button>
+
+    {/* image Section */}
+    <Box component="img" src={image} alt={title}
+      sx={{
+        height: 200,
+        width: '50%',
+        objectFit: 'fit',
+        mb: 2,
+        alignSelf: 'center'
+      }}
+    />
+
+    <Typography
+      variant="h6"
+      gutterBottom
+      sx={{
+        color: '#2E8BC0',
+        fontWeight: 700,
+        letterSpacing: 0.3,
+      }}
+    >
+      {title}
+    </Typography>
+
+    <Typography
+      variant="body2"
+      sx={{
+        color: '#0f1720cc',
+        flexGrow: 1,
+        lineHeight: 1.6,
+      }}
+    >
+      {description}
+    </Typography>
+
+    <Button
+      variant="outlined"
+      size="small"
+      sx={{
+        mt: 2,
+        alignSelf: 'center',
+        color: '#2e8bc0',
+        textTransform: 'none',
+        borderRadius: 5,
+        px: 2,
+        py: 1,
+        boxShadow: '0 3px 10px #2e8bc04d',
+        '&:hover': {
+          bgcolor: '#3786baff',
+          color: '#fff',
+          boxShadow: '0 5px 18px #2e8bc080',
+        },
+      }}
+    >
+      Read More
+    </Button>
   </Paper>
 );
-
 
 
 // --- Main Homepage Component ---
 const HomePage = () => {
 
-  // Data for the new 4th article
-  const moreArticles = [
+  // Data for the article
+   const moreArticles = [
     {
-      title: "The Rise of Accessibility",
-      description: "Ensuring your interfaces meet all WCAG standards for a better user experience.",
-    }
+      title: 'Our Mission',
+      description: 'To protect Ghana’s airspace and support national development through air power.',
+      image: AFLogo
+    },
+    {
+      title: 'Training',
+      description: 'Providing world-class aviation training to uphold excellence in defense and service.',
+      image: AFLogo
+    },
+    
   ];
 
   return (
@@ -477,40 +557,19 @@ const HomePage = () => {
       <Divider sx={{ my: 6 }} />
 
       {/* 2. Featured Articles Section: Responsive 4-Column Grid */}
-      <Box sx={{ mb: 8 }}>
+      <Box sx={{ mb: 4 }}>
         <Typography variant="h4" component="h2" textAlign='center' gutterBottom sx={{ fontWeight: 600 }}>
           ⭐ Featured Articles
         </Typography>
-        <Grid container spacing={5} >
-          {/* Article 1: 1/2 width on SM, 1/4 width on MD and up */}
-          <Grid size={8} item xs={12} sm={6} md={3}> 
-            <ContentCard
-              title="State of React & MUI"
-              description="A deep dive into the latest features and best practices for building complex UIs."
-            />
-          </Grid>
-          {/* Article 2: 1/2 width on SM, 1/4 width on MD and up */}
-          <Grid size={4} item xs={12} sm={6} md={3}>
-            <ContentCard
-              title="Next-Gen Theming"
-              description="How to leverage the theme system for a truly consistent and accessible user experience."
-            />
-          </Grid>
-          {/* Article 3: 1/2 width on SM, 1/4 width on MD and up */}
-          <Grid size={4} item xs={12} sm={6} md={3}>
-            <ContentCard
-              title="Optimizing Performance"
-              description="Tips and tricks for minimizing bundle size and improving initial load times."
-            />
-          </Grid>
-          {/* New Article 4: 1/2 width on SM, 1/4 width on MD and up */}
-          <Grid size={8} item xs={12} sm={6} md={3}>
-            <ContentCard
-              title={moreArticles[0].title}
-              description={moreArticles[0].description}
-            />
-          </Grid>
-        </Grid>
+            <Container sx={{ py: 8 }}>
+              <Grid container spacing={4} justifyContent="center">
+                {moreArticles.map((article, index) => (
+                  <Grid size={6} item xs={12} sm={6} md={4} key={index}>
+                    <ContentCard title={article.title} description={article.description} image={article.image} />
+                  </Grid>
+                ))}
+              </Grid>
+        </Container>
       </Box>
 
       {/* --- Horizontal Separator --- */}
@@ -538,10 +597,10 @@ const HomePage = () => {
             elevation={1}
           >
             <Image sx={{ fontSize: 60, mb: 2 }} />
-            <Typography variant="h6">
+            <Typography variant="h6" >
               Gallery Placeholder
             </Typography>
-            <Button variant="text" sx={{ mt: 1 }}>View All Photos</Button>
+            <Button variant="text" sx={{ mt: 1 }} >View All Photos</Button>
           </Paper>
         </Grid>
 
@@ -557,7 +616,6 @@ const HomePage = () => {
                 <Typography variant="subtitle1" fontWeight="bold">MUI Community Meetup</Typography>
                 <Typography variant="body2" color="text.secondary">October 20th, 2025 - Online</Typography>
               </Box>
-              <Button size="small" variant="outlined" sx={{ ml: 'auto' }}>RSVP</Button>
             </Paper>
             <Paper elevation={1} sx={{ p: 2, mb: 1.5, display: 'flex', alignItems: 'center' }}>
               <EventIcon color="primary" sx={{ mr: 2 }} />
@@ -565,7 +623,6 @@ const HomePage = () => {
                 <Typography variant="subtitle1" fontWeight="bold">Developer Workshop: Hooks</Typography>
                 <Typography variant="body2" color="text.secondary">November 5th, 2025 - 9:00 AM EST</Typography>
               </Box>
-              <Button size="small" variant="outlined" sx={{ ml: 'auto' }}>RSVP</Button>
             </Paper>
             <Paper elevation={1} sx={{ p: 2, mb: 1.5, display: 'flex', alignItems: 'center' }}>
               <EventIcon color="primary" sx={{ mr: 2 }} />
@@ -573,7 +630,6 @@ const HomePage = () => {
                 <Typography variant="subtitle1" fontWeight="bold">Developer Workshop: Hooks</Typography>
                 <Typography variant="body2" color="text.secondary">November 5th, 2025 - 9:00 AM EST</Typography>
               </Box>
-              <Button size="small" variant="outlined" sx={{ ml: 'auto' }}>RSVP</Button>
             </Paper>
             <Paper elevation={1} sx={{ p: 2, mb: 1.5, display: 'flex', alignItems: 'center' }}>
               <EventIcon color="primary" sx={{ mr: 2 }} />
@@ -581,7 +637,6 @@ const HomePage = () => {
                 <Typography variant="subtitle1" fontWeight="bold">Developer Workshop: Hooks</Typography>
                 <Typography variant="body2" color="text.secondary">November 5th, 2025 - 9:00 AM EST</Typography>
               </Box>
-              <Button size="small" variant="outlined" sx={{ ml: 'auto' }}>RSVP</Button>
             </Paper>
             <Box textAlign="right" mt={2}>
               <Button size="small" variant="text">View Calendar</Button>
